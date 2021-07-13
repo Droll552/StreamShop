@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+  <h1>Pam-pam</h1>
+  <body>
+    {% if user.is_authenticated %}
+      <p>Hello, {{ user.email }}. <a href="{% url 'account_logout' %}">Logout</a></p>
+      <a class="btn btn-primary btn-sm" href="{% url 'livestream_create' %}">Create Livestream</a>
+      <a class="btn btn-primary btn-sm" href="{% url 'livestream_list' %}">Livestreams</a>
+      <a class="btn btn-primary btn-sm" href="{% url 'product_list' %}">Product List</a>
+    {% else %}
+      <a class="btn btn-success mx-2" href="{% url 'account_signup' %}">Signup</a>
+      <a class="btn btn-light" href="{% url 'account_login' %}">Login</a>
+    {% endif %}
+  </body>
+{% endblock content%}

@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Livestream Manager{% endblock title %}
+
+{% block content %}
+  <style type="text/css">
+    .status_line{
+      padding: 0px 0px 0px 340px;
+    }
+    .card_header{
+      text-align: center;
+      font-size: 25px;
+    }
+    .card_paragraph{
+      text-align: center;
+    }
+    .first_block{
+      padding-left: 360px;
+    }
+    .buttons{
+      position: absolute;
+      top: 16%;
+      left: 95%;
+    }
+    #tag_line{
+      padding-left: 360px;
+    }
+    #stream_name{
+      position: absolute;
+      top: 60px;
+    }
+    #share_link{
+      position: absolute;
+      top: 16%;
+      left: 91.6%;
+    }
+
+  </style>
+  <h1>Console</h1>
+  <h2>Livestream Manager</h2>
+  <a href="{% url 'livestream_list' %}"> < Back to Livestreams</a>
+
+  <div class="card">
+    <div class="card-body">
+      <h5 id="stream_name">{{livestream.stream_name}}</h5>
+      <p class="first_block">
+        {{ livestream.date }}
+        {{ livestream.time }}
+        {{ livestream.stream_channel }}
+        <a href="livestream.stream_link">
+          {% with stream_link=livestream.stream_link|default_if_none:"" %}
+            {{stream_link|urlizetrunc:55}}
+          {% endwith %}
+        </a>
+      </p>
+        <p class="first_block">{{ livestream.status }}</p>
+      <p id="tag_line">
+        {% for tags in livestream.tags.all %}
+          {{tags}}
+        {% endfor %}
+      </p>
+      {% if upcoming_livestreams or in_progress_livestreams %}
+      <p id="share_link">
+        <a
+          class="btn btn-info"
+          data-toggle="collapse"
+          href="#multiCollapseExample1"
+          role="button"
+          aria-expanded="false"
+          aria-controls="multiCollapseExample1"
+        >
+          Share
+        </a>
+          </p>
+          <div class="col">
+            <div class="collapse multi-collapse" id="multiCollapseExample1">
+              <div class="card card-body">
+                <a href="{% url 'public_livestream_share' livestream.public_id %}">
+                  {{ livestream.get_public_url }}</a>
+              </div>
+            </div>
+          </div>
+      {% endif %}
+
+      <p class="buttons">
+        <a href="{% url 'livestream_delete' livestream.pk %}" class="btn btn-danger">
+          <i class="bi bi-x-square"></i>
+        </a>
+        {% if upcoming_livestreams or in_progress_livestreams %}
+        <a href="{% url 'livestream_update' livestream.pk %}" class="btn btn-primary">
+          <i class="bi bi-pencil-square"></i>
+        </a>
+      </p>
+      {% endif %}
+    </div>
+  </div>
+  <hr/>
+
+  <div class="card">
+    <div class="card-body">
+      <span class="status_line">Open</span>
+      <span class="status_line">In Progress</span>
+      <span class="status_line">Payment Request</span>
+      <span class="status_line">Complete</span>
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="card">
+    <div class="card-body">
+    <h5 class="card-title">Launchpad</h5>
+    <h6 class="card_header">Add Products to Launchpad by clicking in Line Up to sell more comfortable.</h6>
+    <p class="card_paragraph">You have 2 Launchpads available in your subscription</p>
+    <p class="card_paragraph">Upgrade for more Launchpads!
+      <a href="#">
+        <button type="button" class="btn btn-primary">Upgrade Launchpad</button>
+      </a>
+    </p>
+    </div>
+  </div>
+  <hr/>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Line Up</h5>
+          <p class="card_paragraph">Add Products to Line Up to sell them quickly during Livestream.</p>
+          <p class="card_paragraph">
+            <a href="#">
+             <button type="button" class="btn btn-outline-primary">Add from Inventory</button>
+            </a>
+            <a href="#">
+              <button type="button" class="btn btn-primary">Add New Product</button>
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Sold Products</h5>
+          <p class="card_paragraph"><b>After your Products are sold, they will appear here.</b></p>
+          <p class="card_paragraph">Click "Sold" button in Launchpad or in Line Up to mark Products are sold.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}

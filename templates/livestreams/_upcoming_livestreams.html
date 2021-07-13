@@ -1,0 +1,71 @@
+<table class="table mt-4">
+  <thead class="thead-light">
+  <tr>
+    <th scope="col">Stream name</th>
+    <th scope="col">Date</th>
+    <th scope="col">Time</th>
+    <th scope="col">Channel</th>
+    <th scope="col">Status</th>
+    <th scope="col">Tags</th>
+    <th scope="col">Actions</th>
+  </tr>
+  </thead>
+    <tbody>
+    {% for livestream in upcoming_livestreams %}
+      <tr>
+        <td class="align-middle">{{ livestream.stream_name }}</td>
+        <td class="align-middle">{{ livestream.date }}</td>
+        <td class="align-middle">{{ livestream.time }}</td>
+        <td class="align-middle">{{ livestream.stream_channel }}
+          <div><a href="livestream.stream_link">
+            {% with stream_link=livestream.stream_link|default_if_none:"" %}
+              {{stream_link|urlizetrunc:55}}
+            {% endwith %}</a>
+          </div></td>
+        <td class="align-middle">{{ livestream.status }}</td>
+        <td class="align-middle">
+          {% for tags in livestream.tags.all %}
+            {{tags}}
+          {% endfor %}
+        </td>
+        <td class="align-middle">
+          <p>
+            <a
+              class="btn btn-info"
+              data-toggle="collapse"
+              href="#multiCollapseExample1"
+              role="button"
+              aria-expanded="false"
+              aria-controls="multiCollapseExample1"
+            >
+              Share
+            </a>
+            </p>
+            <div class="col">
+              <div class="collapse multi-collapse" id="multiCollapseExample1">
+                <div class="card card-body">
+                  <a href="{% url 'public_livestream_share' livestream.public_id %}">
+                    {{ livestream.get_public_url }}</a>
+                </div>
+              </div>
+            </div>
+            <a href="{% url 'livestream_update' livestream.pk %}">
+              <button type="button" class="btn btn-info">
+                <i class="bi bi-pencil-square"></i>
+              </button>
+            </a>
+            <a href="{% url 'livestream_delete' livestream.pk %}">
+              <button type="button" class="btn btn-danger">
+                <i class="bi bi-x-square"></i>
+              </button>
+            </a>
+            <a href="{% url 'livestream_detail' livestream.pk %}">
+              <button type="button" class="btn btn-outline-info">
+                Create Line-Up
+              </button>
+            </a>
+        </td>
+      </tr>
+    </tbody>
+    {% endfor %}
+</table>

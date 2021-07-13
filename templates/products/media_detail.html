@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Product Details{% endblock title %}
+
+{% block content %}
+  <ul class="list-group">
+    <li class="list-group-item"><b>Artist Name:</b> {{ media_product.artist_name }}</li>
+    <li class="list-group-item"><b>Album Name:</b> {{ media_product.album }}</li>
+    <li class="list-group-item"><b>Label:</b> {{ media_product.label }}</li>
+    <li class="list-group-item"><b>Category:</b> {{ media_product.category }}</li>
+    <li class="list-group-item"><b>Format:</b> {{ media_product.format }}</li>
+    <li class="list-group-item"><b>Price:</b> {{ media_product.price }}</li>
+    <li class="list-group-item"><b>Press:</b> {{ media_product.press }}</li>
+    <li class="list-group-item"><b>Year:</b> {{ media_product.year }}</li>
+    <li class="list-group-item"><b>Genre:</b> {{ media_product.genre }}</li>
+    <li class="list-group-item"><b>Media Condition:</b> {{ media_product.media_condition }}</li>
+    <li class="list-group-item"><b>Sleeve Condition:</b> {{ media_product.sleeve_condition }}</li>
+    <li class="list-group-item"><b>Record Size:</b> {{ media_product.record_size }}</li>
+    <li class="list-group-item"><b>Discogs Link:</b> {{ media_product.discogs_link }}</li>
+    <li class="list-group-item"><b>Popsike Link:</b> {{ media_product.popsike_link }}</li>
+    <li class="list-group-item"><b>Catalog Number:</b> {{ media_product.catalog_number }}</li>
+  </ul>
+  <div class="card-body">
+    <h5 class="card-title"><b>Notes:</b> </h5>
+    <p class="card-text">{{ media_product.notes }}</p>
+  </div>
+  <a href="{% url  'media_update' media_product.pk%}" class="btn btn-outline-info">Update</a>
+  <a href="{% url 'media_delete' media_product.pk %}" class="btn btn-outline-info">Delete</a>
+{% endblock content %}

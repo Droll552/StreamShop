@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Create Media{% endblock %}
+
+{% block content %}
+  <h1>Add New Media</h1>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form | crispy }}
+    <button class="btn btn-success" type="submit">Add Media</button>
+  </form>
+{% endblock content %}

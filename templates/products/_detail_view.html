@@ -1,0 +1,3 @@
+{% if media_product.product_type == "media" %}
+  <a href="{% url 'media_detail' media_product.pk %}" class="btn btn-info ml-2">Details</a>
+{% endif %}

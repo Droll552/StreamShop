@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}Complete livestreams{% endblock title %}
+
+{% block content %}
+  {% include 'livestreams/_livestream_base.html'%}
+
+  <h4>Complete Livestreams</h4>
+{% block livestreams_list %}
+  {% if livestreams %}
+  <p>Number of complete livestreams: {{ counted_complete }}</p>
+  <table class="table mt-4">
+    <thead class="thead-light">
+    <tr>
+      <th scope="col">Stream name</th>
+      <th scope="col">Date</th>
+      <th scope="col">Time</th>
+      <th scope="col">Channel</th>
+      <th scope="col">Status</th>
+      <th scope="col">Tags</th>
+      <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for livestream in livestreams %}
+      <tr>
+        <td class="align-middle">{{ livestream.stream_name }}</td>
+        <td class="align-middle">{{ livestream.date }}</td>
+        <td class="align-middle">{{ livestream.time }}</td>
+        <td class="align-middle">{{ livestream.stream_channel }}
+          <div><a href="livestream.stream_link">
+            {% with stream_link=livestream.stream_link|default_if_none:"" %}
+              {{stream_link|urlizetrunc:55}}
+            {% endwith %}</a>
+          </div></td>
+        <td class="align-middle">{{ livestream.status }}</td>
+        <td class="align-middle">
+          {% for tags in livestream.tags.all %}
+          {{tags}}
+          {% endfor %}
+        </td>
+        <td class="align-middle">
+            <a href="{% url 'livestream_delete' livestream.pk %}">
+              <button type="button" class="btn btn-danger">
+                <i class="bi bi-x-square"></i>
+              </button>
+            </a>
+            <a href="{% url 'livestream_detail' livestream.pk %}">
+              <button type="button" class="btn btn-outline-info">
+                Manage Livestream
+              </button>
+            </a>
+        </td>
+      </tr>
+    </tbody>
+    {% endfor %}
+  </table>
+  {% else %}
+    <h5>You have not any completed livestreams</h5>
+  {% endif %}
+  <a href="/">
+    <button type="button" class="btn btn-warning">Home</button>
+  </a>
+{% endblock livestreams_list%}
+{% endblock content %}

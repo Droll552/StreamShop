@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete livestream{% endblock title %}
+
+{% block content %}
+  <h1>Delete this Livestream?</h1>
+  <form action="" method="post">
+    {% csrf_token %}
+    <p>You won't be able to recover it.</p>
+    <input type="submit" class="btn btn-danger" value="Confirm">
+    {% include "_cancel_button.html" with url_name='livestream_list' %}
+  </form>
+
+{% endblock content %}

@@ -1,0 +1,4 @@
+from .product_list_view_tests import ProductListViewTests
+from .media_product_create_view_tests import MediaProductCreateViewTests
+from .media_product_update_view_tests import MediaProductUpdateViewTests
+from .media_product_delete_view_tests import MediaProductDeleteViewTests

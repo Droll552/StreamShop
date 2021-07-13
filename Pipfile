@@ -1,0 +1,25 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "*"
+dj-database-url = "*"
+psycopg2 = "*"
+django-allauth = "*"
+django-crispy-forms = "*"
+gunicorn = "*"
+whitenoise = "*"
+django-taggit = "*"
+django-bootstrap4 = "*"
+django-bootstrap-datepicker-plus = "*"
+
+[dev-packages]
+faker = "*"
+factory-boy = "*"
+django-extensions = "*"
+ipython = "*"
+
+[requires]
+python_version = "3.9"

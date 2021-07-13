@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}Active livestreams{% endblock title %}
+
+{% block content %}
+  {% include 'livestreams/_livestream_base.html'%}
+
+{% block livestreams_list %}
+  <h4>Upcoming livestreams</h4>
+    {% if not upcoming_livestreams %}
+      <p>You don't have any upcoming livestreams</p>
+    {% else %}
+      <p> Number of Upcoming livestreams: {{ counted_upcoming }}</p>
+      {% include 'livestreams/_upcoming_livestreams.html'%}
+    {% endif %}
+
+  <h4>Livestreams in Progress </h4>
+    {% if not in_progress_livestreams %}
+      <p>You don't have any "In Progress" Livestreams</p>
+    {% else %}
+      <p>Number of In progress livestreams: {{ counted_in_progress }}</p>
+      {% include 'livestreams/_in_progress_livestreams.html'%}
+    {% endif %}
+
+  <h4>Livestreams in Payment Request </h4>
+    {% if not in_payment_request %}
+      <p>You don't have any "In Payment" Livestreams</p>
+    {% else %}
+      <p>Number of In payment streams: {{ counted_in_payment }}</p>
+      {% include 'livestreams/_in_payment_request.html'%}
+    {% endif %}
+
+<a href="/">
+    <button type="button" class="btn btn-warning">Home</button>
+</a>
+{% endblock livestreams_list %}
+{% endblock content %}

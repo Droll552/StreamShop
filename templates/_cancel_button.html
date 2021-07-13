@@ -1,0 +1,5 @@
+{% if url_argument %}
+    <a class="btn btn-secondary" href={% url url_name url_argument %}>Cancel</a>
+{% else %}
+    <a class="btn btn-secondary" href={% url url_name %}>Cancel</a>
+{% endif %}

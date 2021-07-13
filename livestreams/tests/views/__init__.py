@@ -1,0 +1,4 @@
+from .livestream_complete_list_view_tests import LivestreamCompleteListViewTests
+from .livestream_list_view_tests import LivestreamListViewTests
+from .livestream_update_view_tests import LivestreamUpdateViewTests
+from .livestream_create_view_tests import LivestreamCreateViewTests

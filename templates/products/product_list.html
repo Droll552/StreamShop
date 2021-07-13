@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Product List{% endblock title %}
+
+{% block content %}
+<h2>Here you can see your Products</h2>
+  <table class="table table-bordered">
+    <thead class="table-active">
+    <tr>
+      <th scope="col">Product Name:</th>
+      <th scope="col">Description:</th>
+      <th scope="col">Details:</th>
+      <th scope="col">Press:</th>
+      <th scope="col">Product Type:</th>
+      <th scope="col">Price:</th>
+      <th scope="col">Notes:</th>
+      <th scope="col">Action:</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for product in products %}
+      <tr>
+        <td>{{ product.mediaproduct.product_name }}</td>
+        <td>{{ product.mediaproduct.description }}</td>
+        <td>{{ product.mediaproduct.details }}</td>
+        <td>{{ product.press }}</td>
+        <td>{{ product.product_type }}</td>
+        <td>{{ product.asking_price }}</td>
+        <td>{{ product.notes }}</td>
+        <td>{% include "products/_detail_view.html" with media_product=product.mediaproduct %}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  <a class="btn btn-success" href="{% url 'media_create' %}">Create Media</a>
+  <a class="btn btn-outline-info" href="{% url 'home' %}">Home</a>
+{% endblock content %}
